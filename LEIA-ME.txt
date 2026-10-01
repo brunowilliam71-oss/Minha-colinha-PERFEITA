@@ -1,0 +1,21 @@
+MINHA COLINHA — VERSÃO VISUAL
+
+Esta versão já possui:
+- visual responsivo;
+- fotos oficiais do TSE para os candidatos que possuem URL cadastrada;
+- busca por nome/número/partido;
+- filtro por cargo e UF;
+- seleção da colinha;
+- dois espaços para senador;
+- impressão;
+- armazenamento local da seleção.
+
+ATENÇÃO:
+O index.html contém uma amostra de candidaturas reais de 2026 para demonstrar o visual.
+Para transformar em versão nacional completa, substitua a amostra por todos os registros do conjunto oficial "Candidatos - 2026" do TSE e associe cada SQ_CANDIDATO à foto oficial correspondente.
+
+Fonte oficial:
+https://dadosabertos.tse.jus.br/pt_BR/dataset/candidatos-2026
+
+Consulta oficial:
+https://divulgacandcontas.tse.jus.br/divulga/#/

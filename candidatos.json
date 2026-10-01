@@ -1,47 +1,92 @@
 [
   {
-    "id": "demo-presidente-1",
-    "nome": "Candidato de demonstração",
-    "numero": "00000",
-    "partido": "EXEMPLO",
-    "sigla": "EX",
+    "id": "280002551544",
+    "nome": "FLAVIO BOLSONARO",
+    "numero": "22",
+    "partido": "PL",
     "cargo": "Presidente",
-    "uf": ""
+    "uf": "BR",
+    "situacao": "DEFERIDO",
+    "photo": "https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/20322002026/280002551544/BR"
   },
   {
-    "id": "demo-governador-sp",
-    "nome": "Candidato de demonstração SP",
-    "numero": "00000",
-    "partido": "EXEMPLO",
-    "sigla": "EX",
+    "id": "280002541457",
+    "nome": "HERTZ DIAS",
+    "numero": "16",
+    "partido": "PSTU",
+    "cargo": "Presidente",
+    "uf": "BR",
+    "situacao": "DEFERIDO",
+    "photo": "https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/20322002026/280002541457/BR"
+  },
+  {
+    "id": "280002551975",
+    "nome": "EDMILSON COSTA",
+    "numero": "21",
+    "partido": "PCB",
+    "cargo": "Presidente",
+    "uf": "BR",
+    "situacao": "DEFERIDO",
+    "photo": "https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/20322002026/280002551975/BR"
+  },
+  {
+    "id": "280002551000",
+    "nome": "CLARIANA BARAO",
+    "numero": "27",
+    "partido": "DC",
+    "cargo": "Presidente",
+    "uf": "BR",
+    "situacao": "DEFERIDO",
+    "photo": ""
+  },
+  {
+    "id": "280002551001",
+    "nome": "ESCRITOR AUGUSTO CURY",
+    "numero": "70",
+    "partido": "AVANTE",
+    "cargo": "Presidente",
+    "uf": "BR",
+    "situacao": "DEFERIDO",
+    "photo": ""
+  },
+  {
+    "id": "250002541303",
+    "nome": "TARCÍSIO",
+    "numero": "10",
+    "partido": "REPUBLICANOS",
     "cargo": "Governador",
-    "uf": "SP"
+    "uf": "SP",
+    "situacao": "DEFERIDO",
+    "photo": "https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/20322002026/250002541303/SP"
   },
   {
-    "id": "demo-senador-sp-1",
-    "nome": "Candidato de demonstração SP",
-    "numero": "000",
-    "partido": "EXEMPLO",
-    "sigla": "EX",
+    "id": "250002541308",
+    "nome": "ANDRÉ DO PRADO",
+    "numero": "222",
+    "partido": "PL",
     "cargo": "Senador",
-    "uf": "SP"
+    "uf": "SP",
+    "situacao": "DEFERIDO",
+    "photo": "https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/20322002026/250002541308/SP"
   },
   {
-    "id": "demo-federal-sp",
-    "nome": "Candidato de demonstração SP",
-    "numero": "0000",
-    "partido": "EXEMPLO",
-    "sigla": "EX",
+    "id": "250002537942",
+    "nome": "MARCOS PEREIRA",
+    "numero": "1010",
+    "partido": "REPUBLICANOS",
     "cargo": "Deputado Federal",
-    "uf": "SP"
+    "uf": "SP",
+    "situacao": "DEFERIDO",
+    "photo": "https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/20322002026/250002537942/SP"
   },
   {
-    "id": "demo-estadual-sp",
-    "nome": "Candidato de demonstração SP",
-    "numero": "00000",
-    "partido": "EXEMPLO",
-    "sigla": "EX",
+    "id": "250002536407",
+    "nome": "CONTE LOPES",
+    "numero": "22138",
+    "partido": "PL",
     "cargo": "Deputado Estadual",
-    "uf": "SP"
+    "uf": "SP",
+    "situacao": "DEFERIDO",
+    "photo": "https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/20322002026/250002536407/SP"
   }
 ]
