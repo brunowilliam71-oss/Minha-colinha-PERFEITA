@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Monte sua colinha eleitoral personalizada com dados oficiais das candidaturas.">
+<title>Minha Colinha 2026</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--brand:#155eef;--brand2:#0b4cc1;--ok:#087443}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.container{width:min(1080px,calc(100% - 32px));margin:auto}.top{padding:46px 0 28px;background:linear-gradient(135deg,#0b3b91,#155eef);color:#fff}
+.badge{display:inline-block;padding:6px 10px;border-radius:99px;background:#ffffff20;font-size:13px;font-weight:700}.top h1{font-size:clamp(32px,6vw,52px);margin:14px 0 8px}.top p{margin:0;max-width:720px;color:#e8efff;font-size:17px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 30px #1018280d;margin-top:22px}
+.grid{display:grid;grid-template-columns:1fr 220px;gap:12px}.input,.select{width:100%;padding:14px 15px;border:1px solid #d0d5dd;border-radius:11px;font:inherit;background:#fff;color:var(--text)}.input:focus,.select:focus{outline:3px solid #155eef22;border-color:var(--brand)}
+.results{display:grid;gap:10px;margin-top:15px}.candidate{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px;border:1px solid var(--line);border-radius:13px}.candidate small{display:block;color:var(--muted);margin-top:4px}.number{font-size:20px;font-weight:800;color:var(--brand)}
+button{border:0;border-radius:10px;padding:11px 15px;font:inherit;font-weight:750;cursor:pointer;background:var(--brand);color:#fff}button:hover{background:var(--brand2)}button.secondary{background:#eef4ff;color:#174ea6}
+.notice{font-size:13px;color:var(--muted);margin-top:13px}.notice strong{color:var(--text)}
+.colinha{margin-top:24px}.slots{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.slot{border:1px dashed #c9ced8;border-radius:14px;padding:16px;background:#fafbfc;min-height:100px}.slot strong{display:block}.slot .chosen{margin-top:12px;font-weight:700}.empty{color:var(--muted);font-size:14px;margin-top:12px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+footer{padding:28px 0 45px;color:var(--muted);font-size:13px}footer a{color:var(--brand)}
+@media(max-width:700px){.grid,.slots{grid-template-columns:1fr}.candidate{align-items:flex-start;flex-direction:column}.candidate button{width:100%}}
+@media print{body{background:#fff}.top,.search-panel,.actions,footer{display:none!important}.container{width:100%}.panel{box-shadow:none;border:1px solid #bbb}.colinha{margin-top:0}.slot{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="top">
+<div class="container">
+<span class="badge">ELEIÇÕES 2026</span>
+<h1>Minha Colinha</h1>
+<p>Monte sua própria colinha eleitoral. Pesquise pelo nome, número ou partido e escolha os candidatos que deseja consultar.</p>
+</div>
+</header>
+
+<main class="container">
+<section class="panel search-panel" aria-labelledby="busca">
+<h2 id="busca">Escolha seus candidatos</h2>
+<div class="grid">
+<input id="search" class="input" type="search" placeholder="Nome, número ou partido..." autocomplete="off">
+<select id="uf" class="select" aria-label="Estado">
+<option value="">Todos os estados</option>
+<option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option>
+<option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option>
+<option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option>
+<option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+<option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option>
+<option>SE</option><option>TO</option>
+</select>
+</div>
+<div id="results" class="results" aria-live="polite"></div>
+<p class="notice"><strong>Importante:</strong> esta versão demonstrativa usa dados locais de exemplo. Para publicação eleitoral, substitua o arquivo <code>candidatos.json</code> pelos dados oficiais do TSE.</p>
+</section>
+
+<section class="panel colinha" aria-labelledby="minha-colinha">
+<h2 id="minha-colinha">Minha colinha</h2>
+<div id="slots" class="slots"></div>
+<div class="actions">
+<button onclick="window.print()">🖨 Imprimir colinha</button>
+<button class="secondary" onclick="clearAll()">Limpar tudo</button>
+</div>
+</section>
+</main>
+
+<footer><div class="container">Projeto independente. Dados oficiais devem ser conferidos no Portal de Dados Abertos do TSE antes da publicação.</div></footer>
+
+<script>
+const cargos = ["Presidente","Governador","Senador","Senador","Deputado Federal","Deputado Estadual"];
+let candidates=[], selected=JSON.parse(localStorage.getItem("colinha2026")||"[]");
+
+const $ = id => document.getElementById(id);
+async function load(){
+  try{
+    const r=await fetch("candidatos.json",{cache:"no-store"});
+    candidates=await r.json();
+  }catch(e){candidates=[]}
+  renderResults(); renderSlots();
+}
+function renderResults(){
+  const q=$("search").value.trim().toLowerCase(), uf=$("uf").value;
+  const filtered=candidates.filter(c=>{
+    const text=`${c.nome} ${c.numero} ${c.partido} ${c.sigla} ${c.cargo} ${c.uf}`.toLowerCase();
+    return (!q||text.includes(q))&&(!uf||c.uf===uf);
+  }).slice(0,40);
+  $("results").innerHTML=filtered.length?filtered.map(c=>`
+    <article class="candidate">
+      <div><strong>${esc(c.nome)}</strong><small>${esc(c.cargo)}${c.uf?" • "+esc(c.uf):""} • ${esc(c.partido||"")}</small></div>
+      <div><span class="number">${esc(c.numero)}</span> <button onclick="addCandidate('${escAttr(c.id)}')">Adicionar</button></div>
+    </article>`).join(""):`<p class="empty">Nenhum candidato encontrado.</p>`;
+}
+function addCandidate(id){
+  const c=candidates.find(x=>x.id===id); if(!c)return;
+  const idx=cargos.indexOf(c.cargo);
+  if(idx<0)return alert("Cargo não disponível na colinha.");
+  if(cargoTaken(idx)) selected=selected.filter(x=>x.slot!==idx);
+  selected.push({...c,slot:idx}); save(); renderSlots();
+}
+function cargoTaken(i){return selected.some(x=>x.slot===i)}
+function removeCandidate(i){selected=selected.filter(x=>x.slot!==i);save();renderSlots()}
+function renderSlots(){
+  $("slots").innerHTML=cargos.map((cargo,i)=>{
+    const c=selected.find(x=>x.slot===i);
+    return `<div class="slot"><strong>${i+1}. ${cargo}</strong>${
+      c?`<div class="chosen">${esc(c.nome)}<br><span class="number">${esc(c.numero)}</span></div><button class="secondary" style="margin-top:10px" onclick="removeCandidate(${i})">Alterar</button>`
+      :`<div class="empty">Nenhum candidato selecionado</div>`}</div>`;
+  }).join("");
+}
+function save(){localStorage.setItem("colinha2026",JSON.stringify(selected))}
+function clearAll(){selected=[];save();renderSlots()}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function escAttr(v){return String(v??"").replace(/'/g,"&#039;")}
+$("search").addEventListener("input",renderResults);$("uf").addEventListener("change",renderResults);load();
+</script>
+</body>
+</html>

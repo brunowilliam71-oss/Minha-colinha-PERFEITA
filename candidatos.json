@@ -1,0 +1,47 @@
+[
+  {
+    "id": "demo-presidente-1",
+    "nome": "Candidato de demonstração",
+    "numero": "00000",
+    "partido": "EXEMPLO",
+    "sigla": "EX",
+    "cargo": "Presidente",
+    "uf": ""
+  },
+  {
+    "id": "demo-governador-sp",
+    "nome": "Candidato de demonstração SP",
+    "numero": "00000",
+    "partido": "EXEMPLO",
+    "sigla": "EX",
+    "cargo": "Governador",
+    "uf": "SP"
+  },
+  {
+    "id": "demo-senador-sp-1",
+    "nome": "Candidato de demonstração SP",
+    "numero": "000",
+    "partido": "EXEMPLO",
+    "sigla": "EX",
+    "cargo": "Senador",
+    "uf": "SP"
+  },
+  {
+    "id": "demo-federal-sp",
+    "nome": "Candidato de demonstração SP",
+    "numero": "0000",
+    "partido": "EXEMPLO",
+    "sigla": "EX",
+    "cargo": "Deputado Federal",
+    "uf": "SP"
+  },
+  {
+    "id": "demo-estadual-sp",
+    "nome": "Candidato de demonstração SP",
+    "numero": "00000",
+    "partido": "EXEMPLO",
+    "sigla": "EX",
+    "cargo": "Deputado Estadual",
+    "uf": "SP"
+  }
+]
